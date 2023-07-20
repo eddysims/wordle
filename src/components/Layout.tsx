@@ -8,7 +8,7 @@ export function Layout({ children }: PropsWithChildren<{}>) {
           Wordle
         </h1>
       </header>
-      <main className="flex-1 flex items-center justify-center">
+      <main className="flex-1 flex items-center justify-center flex-col">
         {children}
       </main>
     </div>
