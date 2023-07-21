@@ -19,11 +19,7 @@ export function GameBoard({ answer, allowedGuesses = 5 }: GameBoardProps) {
     <div className="grid gap-8">
       <div className="grid gap-3 justify-center">
         {Array.from({ length: allowedGuesses }).map((_, index) => (
-          <Guess
-            key={index}
-            wordLength={answer.length}
-            word={guesses?.[index]}
-          />
+          <Guess key={index} answer={answer} word={guesses?.[index]} />
         ))}
       </div>
       <GuessForm wordLength={answer.length} onSubmit={handleAddGuess} />

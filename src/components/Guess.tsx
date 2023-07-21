@@ -1,16 +1,26 @@
-import { LetterBox } from "./LetterBox";
+import { LetterBox, LetterStatus } from "./LetterBox";
 
 interface GuessProps {
-  wordLength: number;
   word?: string;
-  answer?: string;
+  answer: string;
 }
 
-export function Guess({ wordLength, word }: GuessProps) {
+export function Guess({ word, answer }: GuessProps) {
   return (
     <div className="flex gap-2">
-      {Array.from({ length: wordLength }).map((_, index) => {
-        return <LetterBox key={index} letter={word && word[index]} />;
+      {Array.from({ length: answer.length }).map((_, index) => {
+        const letter = word?.[index];
+
+        let status: LetterStatus = "unused";
+        if (letter && answer.includes(letter)) {
+          status = "used";
+        }
+
+        if (letter && answer[index] === letter) {
+          status = "correct";
+        }
+
+        return <LetterBox key={index} letter={letter} status={status} />;
       })}
     </div>
   );
