@@ -2,7 +2,7 @@ import clsx from "clsx";
 
 interface ButtonProps {
   label: string;
-  onClick(): void;
+  onClick?(): void;
   type?: "button" | "submit";
   disabled?: boolean;
   size?: "base" | "small"

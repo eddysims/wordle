@@ -15,7 +15,7 @@ export function InputText({
   onChange,
 }: InputTextProps) {
   const className = clsx(
-    "h-12 py-3 px-5 rounded outline-0 bg-white",
+    "h-12 py-3 px-5 rounded outline-0 bg-white w-full",
     "border border-neutral-300",
     "text-lg tracking-wider",
     "focus:shadow-lg transition-shadow duration-300"

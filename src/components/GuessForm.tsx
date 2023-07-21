@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { SyntheticEvent, useState } from "react";
 import { InputText } from "./InputText";
 import { Button } from "./Button";
 
@@ -14,24 +14,29 @@ export function GuessForm({ wordLength, onSubmit }: GuessFormProps) {
     setGuess(val);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (event: SyntheticEvent) => {
+    event.preventDefault();
+
     onSubmit(guess);
+    setGuess('')
   };
 
+
   return (
-    <div className="flex gap-3">
-      <InputText
-        onChange={handleSetGuess}
-        value={guess}
-        minLength={wordLength}
-        maxLength={wordLength}
-      />
+    <form className="flex gap-3" onSubmit={handleSubmit}>
+      <div className="flex-1">
+        <InputText
+          onChange={handleSetGuess}
+          value={guess}
+          minLength={wordLength}
+          maxLength={wordLength}
+        />
+      </div>
       <Button
         type="submit"
-        onClick={handleSubmit}
         label="Guess"
         disabled={guess?.length !== wordLength}
       />
-    </div>
+    </form>
   );
 }
