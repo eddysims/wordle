@@ -17,5 +17,5 @@ export function LetterBox({ letter, status }: LetterBoxProps) {
     }
   );
 
-  return <div className={classNames}>{letter && letter[0]}</div>;
+  return <div className={classNames} data-testid="letter-box">{letter && letter[0]}</div>;
 }
