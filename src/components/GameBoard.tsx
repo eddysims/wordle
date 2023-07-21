@@ -3,6 +3,8 @@ import { useState } from "react";
 import { GuessForm } from "./GuessForm";
 import { Guess } from "./Guess";
 
+type GameStatus = "win" | "lose" | undefined;
+
 interface GameBoardProps {
   answer: string;
   allowedGuesses?: number;
@@ -10,9 +12,21 @@ interface GameBoardProps {
 
 export function GameBoard({ answer, allowedGuesses = 5 }: GameBoardProps) {
   const [guesses, setGuesses] = useState<string[]>([]);
+  const [gameStatus, setGameStatus] = useState<GameStatus>();
 
   const handleAddGuess = (val: string) => {
-    setGuesses([...guesses, val]);
+    const newGuesses = [...guesses, val];
+    setGuesses(newGuesses);
+
+    if(val === answer) {
+      setGameStatus('win')
+      return;
+    }
+
+    if(newGuesses.length === allowedGuesses) {
+      setGameStatus('lose');
+      return;
+    }
   };
 
   return (
@@ -22,7 +36,18 @@ export function GameBoard({ answer, allowedGuesses = 5 }: GameBoardProps) {
           <Guess key={index} answer={answer} word={guesses?.[index]} />
         ))}
       </div>
-      <GuessForm wordLength={answer.length} onSubmit={handleAddGuess} />
+
+      {gameStatus === "win" && (
+        <div className="text-center text-green-500 text-xl">You Win 🎉</div>
+      )}
+
+      {gameStatus === "lose" && (
+        <div className="text-center text-red-500 text-xl">You Lose 😢</div>
+      )}
+
+      {!gameStatus && (
+        <GuessForm wordLength={answer.length} onSubmit={handleAddGuess} />
+      )}
     </div>
   );
 }
