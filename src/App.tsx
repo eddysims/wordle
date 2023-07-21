@@ -4,21 +4,27 @@ import { useGetWord } from "./hooks/useGetWord";
 import { GuessForm } from "./components/GuessForm";
 import { Guess } from "./components/Guess";
 
-const guesses = 5;
+const MAX_GUESSES = 5;
 
 function App() {
   const [wordLength] = useState(5);
+  const [guesses, setGuesses] = useState<string[]>([])
   const word = useGetWord(wordLength);
+
+  const handleAddGuess = (val: string) => {
+    setGuesses([...guesses, val])
+  }
 
   return (
     <Layout>
       <div className="grid gap-8">
         <div className="grid gap-3 justify-center">
-          {Array.from({ length: guesses }).map((_, index) => (
-            <Guess key={index} wordLength={wordLength} />
+          {JSON.stringify(guesses)}
+          {Array.from({ length: MAX_GUESSES }).map((_, index) => (
+            <Guess key={index} wordLength={wordLength} word={guesses?.[index]} />
           ))}
         </div>
-        <GuessForm wordLength={wordLength} onSubmit={(val) => alert(val)} />
+        <GuessForm wordLength={wordLength} onSubmit={handleAddGuess} />
       </div>
     </Layout>
   );
