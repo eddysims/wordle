@@ -1,4 +1,6 @@
-import { ChangeEvent, useState } from "react";
+import { useState } from "react";
+import { InputText } from "./InputText";
+import { Button } from "./Button";
 
 interface GuessFormProps {
   wordLength: number;
@@ -8,9 +10,8 @@ interface GuessFormProps {
 export function GuessForm({ wordLength, onSubmit }: GuessFormProps) {
   const [guess, setGuess] = useState<string>();
 
-  const handleSetGuess = (event: ChangeEvent<HTMLInputElement>) => {
-    event.preventDefault();
-    setGuess(event.target.value);
+  const handleSetGuess = (val: string) => {
+    setGuess(val);
   };
 
   const handleSubmit = () => {
@@ -18,22 +19,19 @@ export function GuessForm({ wordLength, onSubmit }: GuessFormProps) {
   };
 
   return (
-    <div>
-      <input
-        type="text"
+    <div className="flex gap-3">
+      <InputText
         onChange={handleSetGuess}
         value={guess}
         minLength={wordLength}
         maxLength={wordLength}
-        className="bg-white py-3 px-5 rounded-l-full outline-0 focus:"
       />
-      <button
+      <Button
         type="submit"
         onClick={handleSubmit}
-        className="py-3 bg-green-600 px-5 rounded-r-full uppercase font-bold tracking-wide text-white hover:bg-green-400 transition-colors"
-      >
-        Guess
-      </button>
+        label="Guess"
+        disabled={guess?.length !== wordLength}
+      />
     </div>
   );
 }
