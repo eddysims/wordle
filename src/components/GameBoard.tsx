@@ -37,7 +37,7 @@ export function GameBoard({
 
   const handleNewGame = (wordLength: number, attempts: number) => {
     setGuesses([]);
-    setGameStatus(undefined)
+    setGameStatus(undefined);
     onNewGame(wordLength, attempts);
   };
 

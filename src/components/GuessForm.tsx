@@ -18,9 +18,8 @@ export function GuessForm({ wordLength, onSubmit }: GuessFormProps) {
     event.preventDefault();
 
     onSubmit(guess);
-    setGuess('')
+    setGuess("");
   };
-
 
   return (
     <form className="flex gap-3" onSubmit={handleSubmit}>

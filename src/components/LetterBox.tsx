@@ -1,6 +1,6 @@
 import { clsx } from "clsx";
 
-export type LetterStatus = "unused" | "used" | "correct"
+export type LetterStatus = "unused" | "used" | "correct";
 
 interface LetterBoxProps {
   letter?: string;

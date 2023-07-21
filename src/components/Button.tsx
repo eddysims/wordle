@@ -5,14 +5,14 @@ interface ButtonProps {
   onClick?(): void;
   type?: "button" | "submit";
   disabled?: boolean;
-  size?: "base" | "small"
+  size?: "base" | "small";
 }
 
 export function Button({
   label,
   type = "button",
   disabled,
-  size="base",
+  size = "base",
   onClick,
 }: ButtonProps) {
   const className = clsx(
@@ -20,9 +20,10 @@ export function Button({
     "uppercase font-bold tracking-wider text-white",
     "transition-colors duration-300",
     "disabled:cursor-not-allowed",
-    "bg-green-500 hover:bg-green-600 disabled:bg-neutral-300", {
-      'h-12': size === 'base',
-      'h-8 text-xs': size === "small"
+    "bg-green-500 hover:bg-green-600 disabled:bg-neutral-300",
+    {
+      "h-12": size === "base",
+      "h-8 text-xs": size === "small",
     }
   );
 
